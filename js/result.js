@@ -14,6 +14,10 @@
   let spinId = 0;
 
   function show(dish) {
+    card.classList.remove('is-spinning');
+    card.setAttribute('aria-busy', 'false');
+    $('btn-again').disabled = false;
+    $('btn-again').textContent = 'Quay lần nữa';
     const mealKey = dish.meals.includes(meal) ? meal : dish.meals[0];
     document.body.dataset.cuisine = dish.cuisine;
     document.title = `${dish.name} | Hôm nay ăn gì?`;
@@ -42,6 +46,9 @@
     new Image().src = App.photo(dish, 1200, 900);   // tải sẵn để ảnh hiện ngay khi dừng
     card.classList.remove('is-bounce');
     card.classList.add('is-spinning');
+    card.setAttribute('aria-busy', 'true');
+    $('btn-again').disabled = true;
+    $('btn-again').textContent = 'Đang quay...';
     $('dish-meta').textContent = 'Đang quay...';
     $('dish-desc').textContent = 'Chờ một chút nhé.';
 
